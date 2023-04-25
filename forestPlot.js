@@ -38,7 +38,6 @@ async function createForestPlot(datafile,
     width = 780 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
-
     // Append the SVG object to the body of the page
     const svg = d3.select(id)
                   .append("svg")
@@ -71,9 +70,6 @@ async function createForestPlot(datafile,
         y.domain(data.map(d => d.group));
     }
     
-
-    
-  
     // Add x-axis and y-axis to the SVG
     svg.append("g")
         .attr("class", "x axis")
@@ -129,7 +125,6 @@ async function createForestPlot(datafile,
             const groupTitle = groupData.title ? groupData.title : "N/A";
             const groupAbstract = groupData.abstract ? groupData.abstract : "No abstract available.";
 
-
             d3.select("#tooltip_author")
                 .style("display", "inline-block")
                 .html("<span style='color: #24343c; font-weight: bold;'><b>" + groupTitle + "</b></span><br><span style='color: " + textTipTitColor + "; font-weight: bold;'>" + d + "</span><br><br>" + groupAbstract)
@@ -169,20 +164,17 @@ async function createForestPlot(datafile,
         .style("fill", TextColor)
         .attr("transform", "rotate(-360)"); // Rotate the text vertically
 
-
-
-
-// Add the title "CI (LB)"
-svg.append("text")
-    .attr("class", "title")
-    .attr("text-anchor", "middle")
-    .attr("x", width - 70) // Use the same x position as the LB values
-    .attr("y", -margin.top / 3.5)
-    .text("LB")
-    .style("font-size", "16px")
-    .style("font-weight", "bold")
-    .style("fill", TextColor)
-    .attr("transform", "rotate(-360)"); // Rotate the text vertically
+    // Add the title "CI (LB)"
+    svg.append("text")
+        .attr("class", "title")
+        .attr("text-anchor", "middle")
+        .attr("x", width - 70) // Use the same x position as the LB values
+        .attr("y", -margin.top / 3.5)
+        .text("LB")
+        .style("font-size", "16px")
+        .style("font-weight", "bold")
+        .style("fill", TextColor)
+        .attr("transform", "rotate(-360)"); // Rotate the text vertically
 
     // Add the title "CI (UB)"
     svg.append("text")
@@ -195,7 +187,6 @@ svg.append("text")
         .style("font-weight", "bold")
         .style("fill", TextColor)
         .attr("transform", "rotate(-360)"); // Rotate the text vertically
-
   
     // Set the transition duration and delay
     const duration = 1000;
@@ -327,7 +318,6 @@ svg.append("text")
             .attr("cx", d => x(d.estimate))
             .attr("opacity", 1);
         
-    
     // Create a tooltip div element
     d3.select("body")
         .append("div")
@@ -359,8 +349,6 @@ svg.append("text")
         })
         .style("font-size", "14px");
     
-
-    // Add the lower bound values
     // Add the lower bound values
     svg.selectAll(".lower")
         .data(data)
@@ -384,8 +372,6 @@ svg.append("text")
             return d.lower.toFixed(2);
         })
         .style("font-size", "14px");
-
-
 
     svg.append("text")
         .attr("class", "x-label")

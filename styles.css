@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 #forestPlot {
     font-family: 'Lato', sans-serif;
 }
+
 #forestPlot text {
     font-family: 'Lato', sans-serif;
 }
@@ -9,6 +11,7 @@
 #forestPlot1 {
     font-family: 'Lato', sans-serif;
 }
+
 #forestPlot1 text {
     font-family: 'Lato', sans-serif;
 }
@@ -16,6 +19,7 @@
 #forestPlot2 {
     font-family: 'Lato', sans-serif;
 }
+
 #forestPlot2 text {
     font-family: 'Lato', sans-serif;
 }
@@ -23,6 +27,7 @@
 #forestPlot3 {
     font-family: 'Lato', sans-serif;
 }
+
 #forestPlot3 text {
     font-family: 'Lato', sans-serif;
 }
@@ -37,6 +42,7 @@
     box-shadow: 0px 0px 10px grey;
     font-family: 'Lato', sans-serif;
 }
+
 #tooltip_author {
     display: none;
     position: absolute;
@@ -47,10 +53,12 @@
     box-shadow: 0px 0px 10px grey;
     font-family: 'Lato', sans-serif;
 }
+
 .highlighted {
     fill: red;
     font-weight: bold;
 }
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -59,9 +67,6 @@
     width: 55%; /* Adjust the grid container width as needed */
     margin: 0 auto;
 }
-
-
-
 
 .plot-container {
     display: inline-block;
@@ -95,25 +100,16 @@
     background-color: #C9E0EC; /* Add this line to set the background color */
   }
 
-
-
-
-
-
-
-
-
   .dropdown-menu {
     background-color: #f8f9fa !important;
     border: none !important;
     box-shadow: none !important;
   }
 
-
-
   .dropdown-item {
     color: #343a40 !important;
   }
+
   .dropdown-item:hover {
     background-color: #f8f9fa !important;
     color: #dc3545 !important;
