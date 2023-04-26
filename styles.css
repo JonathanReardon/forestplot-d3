@@ -74,11 +74,13 @@
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 25px; /* Adjust the space between columns as needed */
     grid-row-gap: 25px; /* Adjust the space between rows as needed */
-    width: 55%; /* Adjust the grid container width as needed */
+    width: 50%; /* Adjust the grid container width as needed */
     margin: 0 auto;
 }
 
 .plot-container {
+    height: 730px;
+    padding-top: 10px;
     display: inline-block;
     vertical-align: top;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);

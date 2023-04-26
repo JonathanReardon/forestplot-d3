@@ -34,7 +34,7 @@ async function createForestPlot(
 
   // Set the dimensions and margins of the graph
   const margin = { top: 50, right: 50, bottom: 90, left: 150 },
-    width = 780 - margin.left - margin.right,
+    width = 780 - margin.left - margin.right + 80,
     height = 700 - margin.top - margin.bottom;
 
   // Append the SVG object to the body of the page
