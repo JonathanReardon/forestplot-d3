@@ -33,10 +33,10 @@ async function createForestPlot(datafile,
       });
 
     // Set the dimensions and margins of the graph
-    const margin = {top: 50, right: 50, bottom: 50, left: 150},
+    const margin = {top: 50, right: 50, bottom: 90, left: 150},
 
     width = 780 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+    height = 700 - margin.top - margin.bottom;
 
     // Append the SVG object to the body of the page
     const svg = d3.select(id)
@@ -71,12 +71,10 @@ async function createForestPlot(datafile,
     }
     
     // Add x-axis and y-axis to the SVG
-    svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis)
-        .selectAll(".tick line") // Select all tick lines
-        .attr("stroke-width", 0); // Set the stroke-width to 0 to remove them
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + (height + 50) + ")") // Subtract the gap size (50 pixels) from the height
+    .call(xAxis);
 
     // Change the color of the x-axis line
     svg.selectAll(".domain")
@@ -96,7 +94,7 @@ async function createForestPlot(datafile,
                         .attr("x1", 0)
                         .attr("x2", 0)
                         .attr("y1", 0)
-                        .attr("y2", -height)
+                        .attr("y2", -height - 50)
                         .attr("stroke", backDashLineColor)
                         .attr("stroke-width", 1)
                         .attr("stroke-dasharray", "4, 4");
@@ -255,7 +253,7 @@ async function createForestPlot(datafile,
         .attr("x1", x(0))
         .attr("x2", x(0))
         .attr("y1", 0)
-        .attr("y2", height)
+        .attr("y2", height+50)
         .style("stroke", zeroLineColor)
         .style("stroke-width", "1px")
 
@@ -376,11 +374,85 @@ async function createForestPlot(datafile,
     svg.append("text")
         .attr("class", "x-label")
         .attr("x", x(0))
-        .attr("y", height + margin.bottom * 0.8)
+        .attr("y", height + margin.bottom * 1)
         .attr("text-anchor", "middle")
         .text(xAxisLabel)
         .style("font-size", "16px")
-        .style("fill", TextColor)
+        .style("fill", TextColor);
+
+
+
+    // The pooled effect size and confidence interval values
+    const pooledEffectSize = -0.0802;
+    const lowerBound = -0.2039;
+    const upperBound = 0.0435;
+
+    const yDiamond = d3.scaleLinear().range([0, height]);
+
+    yDiamond.domain([0, 1]); // A simple domain since we'll use 0 and 1 for the diamond's y positions
+
+    const diamondLine = d3.line()
+        .x(d => x(d[0]))
+        .y(d => yDiamond(d[1]));
+
+    // The y position for the diamond (you can adjust this as needed)
+    const diamondY = y(data[data.length - 1].group) + y.bandwidth() + 25; // Adjust the 30 as needed to add more space
+
+    const diamondPoints = [
+        [pooledEffectSize, diamondY - 10], // Top point
+        [upperBound, diamondY], // Right point
+        [pooledEffectSize, diamondY + 10], // Bottom point
+        [lowerBound, diamondY]  // Left point
+    ].map(point => [point[0], yDiamond.invert(point[1])]);
+    
+
+    // Add a vertical line running through the middle of the diamond
+    svg.append("line")
+        .attr("class", "diamond-middle-line")
+        .attr("x1", x(pooledEffectSize))
+        .attr("x2", x(pooledEffectSize))
+        .attr("y1", height + 50) // Set the y1 attribute to match the y position of the x-axis line
+        .attr("y2", 0) // Set the endpoint to the top of the chart
+        .style("stroke", "red")
+        .style("stroke-width", "1px")
+        .style("stroke-dasharray", "5,5"); // Add this line to make the line dashed
+
+    // Create the diamond shape by appending a path element to the SVG
+    svg.append("path")
+        .datum(diamondPoints)
+        .attr("d", d => {
+        let path = diamondLine(d);
+        path += "Z"; // Add the "Z" command to close the path
+        return path;
+        })
+        .attr("fill", "#5A5A5A") // Set the fill color as needed
+        .attr("stroke", "#5A5A5A") // Set the stroke color as needed
+        .attr("stroke-width", 2);
+
+
+    // Add a "Summary Measure" label aligned with the y-axis values
+    svg.append("text")
+        .attr("class", "summary-measure-label")
+        .attr("x", margin.left - 248) // Adjust the position by changing the value as needed
+        .attr("y", diamondY) // Position the label at the same height as the diamond
+        .text("Pooled Effect")
+        .style("font-size", "16px") // Adjust the font size as needed
+        .style("fill", "red"); // Adjust the text color as needed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };
 
   // Call the function with the filename as argument
