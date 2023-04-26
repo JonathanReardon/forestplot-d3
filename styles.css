@@ -37,8 +37,8 @@
     position: absolute;
     background-color: white;
     padding: 10px;
-    font-size: 18px;
-    width: 250px;
+    font-size: 16px;
+    width: 220px;
     box-shadow: 0px 0px 10px grey;
     font-family: 'Lato', sans-serif;
 }
@@ -48,10 +48,20 @@
     position: absolute;
     background-color: white;
     padding: 15px;
-    font-size: 18px;
+    font-size: 16px;
     width: 400px;
     box-shadow: 0px 0px 10px grey;
     font-family: 'Lato', sans-serif;
+}
+
+.tooltip_diamond {
+  position: absolute;
+  background-color: white;
+  padding: 10px;
+  font-size: 16px;
+  width: 250px;
+  box-shadow: 0px 0px 10px grey;
+  font-family: 'Lato', sans-serif;
 }
 
 .highlighted {
@@ -119,16 +129,3 @@
     margin-top: 40px; /* Add space above the dropdown */
     margin-bottom: 40px; /* Add space below the dropdown */
   }
-
-
-
-
-
-
-
-
-
-
-
-
-  
